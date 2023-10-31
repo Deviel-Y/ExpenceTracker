@@ -1,0 +1,25 @@
+body {
+  padding: 10%;
+  box-sizing: content-box;
+  background-color: aqua;
+}
+
+td,
+th {
+  padding: 8px;
+}
+
+.myTable {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-align: center;
+}
+
+thead tr {
+  background-color: rgb(231, 254, 102);
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(244, 255, 183);
+  color: rgb(0, 0, 0);
+}
