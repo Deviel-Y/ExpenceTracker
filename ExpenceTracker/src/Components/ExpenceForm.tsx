@@ -2,10 +2,7 @@ import categories from "./Categories";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
-interface Props {
-  onSubmit: (data: ExpenceFormData) => void;
-}
+import useExpenceStore from "../store";
 
 const schema = z.object({
   description: z
@@ -21,9 +18,11 @@ const schema = z.object({
   }),
 });
 
-type ExpenceFormData = z.infer<typeof schema>;
+export type ExpenceFormData = z.infer<typeof schema>;
 
-function ExpenceForm({ onSubmit }: Props) {
+function ExpenceForm() {
+  const { expenceSubmit } = useExpenceStore();
+
   const {
     register,
     reset,
@@ -36,7 +35,7 @@ function ExpenceForm({ onSubmit }: Props) {
       className="mb-5"
       onSubmit={handleSubmit((data) => {
         {
-          onSubmit(data);
+          expenceSubmit(data);
           reset();
         }
       })}

@@ -1,16 +1,12 @@
-export interface Expence {
-  id: number;
-  description: string;
-  amount: number;
-  category: string;
-}
+import useExpenceStore from "../store";
 
-interface Prob {
-  expences: Expence[];
-  onDelete: (id: number) => void;
-}
+function ExpenceList() {
+  const { expences, expenceDelete } = useExpenceStore();
 
-function ExpenceList({ expences, onDelete }: Prob) {
+  // const visibleExpences = selectedCategory
+  //   ? expences.filter((e) => e.category === selectedCategory)
+  //   : expences;
+
   if (expences.length === 0) return null;
   return (
     <table className="myTable table-bordered">
@@ -30,7 +26,7 @@ function ExpenceList({ expences, onDelete }: Prob) {
             <td>
               <button
                 className="btn btn-outline-danger"
-                onClick={() => onDelete(item.id)}
+                onClick={() => expenceDelete(item.id!)}
               >
                 Delete
               </button>
@@ -42,10 +38,7 @@ function ExpenceList({ expences, onDelete }: Prob) {
         <tr>
           <td>Total</td>
           <td colSpan={3}>
-            $
-            {expences
-              .reduce((acc, expence) => acc + expence.amount, 0)
-              .toFixed(2)}
+            ${expences.reduce((acc, expence) => acc + expence.amount, 0)}
           </td>
         </tr>
       </tfoot>
