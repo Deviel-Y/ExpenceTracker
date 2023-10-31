@@ -3,10 +3,6 @@ import useExpenceStore from "../store";
 function ExpenceList() {
   const { expences, expenceDelete } = useExpenceStore();
 
-  // const visibleExpences = selectedCategory
-  //   ? expences.filter((e) => e.category === selectedCategory)
-  //   : expences;
-
   if (expences.length === 0) return null;
   return (
     <table className="myTable table-bordered">
@@ -38,7 +34,10 @@ function ExpenceList() {
         <tr>
           <td>Total</td>
           <td colSpan={3}>
-            ${expences.reduce((acc, expence) => acc + expence.amount, 0)}
+            $
+            {expences
+              .reduce((acc, expence) => acc + expence.amount, 0)
+              .toFixed(2)}
           </td>
         </tr>
       </tfoot>
